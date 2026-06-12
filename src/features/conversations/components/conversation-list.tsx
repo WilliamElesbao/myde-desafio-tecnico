@@ -1,6 +1,6 @@
 import { MessageSquareDashed } from "lucide-react";
 import { EmptyState } from "@/components/empty-state";
-import type { Conversation } from "@/lib/api";
+import type { Conversation } from "@/lib/http/api";
 import { ConversationListItem } from "./conversation-list-item";
 
 type ConversationListProps = {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getMe } from "@/lib/api";
+import { getMe } from "@/lib/http/api";
 import { queryKeys } from "@/lib/react-query/query-keys";
 
 export function useMe() {

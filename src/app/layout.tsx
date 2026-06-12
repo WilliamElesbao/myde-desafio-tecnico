@@ -5,7 +5,7 @@ import type { PropsWithChildren } from "react";
 import { InboxShell } from "@/components/layout/inbox-shell";
 import { AgentBadge } from "@/features/agent/components/agent-badge";
 import { ConversationsPanel } from "@/features/conversations/components/conversations-panel";
-import { getConversations, getMe } from "@/lib/api";
+import { getConversations, getMe } from "@/lib/http/api";
 import { makeQueryClient } from "@/lib/react-query/query-client";
 import { queryKeys } from "@/lib/react-query/query-keys";
 import { Providers } from "../providers/providers";

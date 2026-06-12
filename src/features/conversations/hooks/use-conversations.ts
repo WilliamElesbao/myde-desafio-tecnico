@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { CONVERSATIONS_POLL_INTERVAL_MS } from "@/constants/polling";
-import { getConversations } from "@/lib/api";
+import { getConversations } from "@/lib/http/api";
 import { queryKeys } from "@/lib/react-query/query-keys";
 
 export function useConversations() {

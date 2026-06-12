@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import type { Conversation } from "@/lib/api";
+import type { Conversation } from "@/lib/http/api";
 import { cn } from "@/lib/shadcn/utils";
 import { formatConversationTime } from "@/utils/format-time";
 

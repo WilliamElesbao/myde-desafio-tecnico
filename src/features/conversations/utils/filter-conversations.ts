@@ -1,4 +1,4 @@
-import type { Conversation } from "@/lib/api";
+import type { Conversation } from "@/lib/http/api";
 
 /** Search by name or phone number, ignoring accents/case */
 export function filterConversations(
