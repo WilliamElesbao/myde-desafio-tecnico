@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  /** Palette inspired by WhatsApp Web */
+  --color-wa-green: #25d366;
+  --color-wa-green-dark: #128c7e;
+  --color-wa-teal: #075e54;
+  --color-bubble-out: #d9fdd3;
+  --color-bubble-in: #ffffff;
+  --color-chat-bg: #efeae2;
+  --color-sidebar-bg: #ffffff;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #0a0a0a;
