@@ -1,10 +1,14 @@
+"use client";
+
 import { SendHorizontal } from "lucide-react";
-import { type KeyboardEvent, useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useAutosizeTextarea } from "@/hooks/use-autosize-textarea";
+import { handleKeyDown } from "@/utils/handle-key-down";
 import { useSendMessage } from "../hooks/use-send-message";
-import type { ComposerFormValues } from "../types";
+import type { ComposerFormValues } from "../schemas/composer-form";
 
 type ComposerFormProps = {
   conversationId: string;
@@ -15,20 +19,7 @@ function ComposerForm({ conversationId }: Readonly<ComposerFormProps>) {
     useFormContext<ComposerFormValues>();
   const message = useWatch({ control, name: "message" });
   const sendMessage = useSendMessage(conversationId);
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-
-  // Auto-grow: the height follows the content (including when the field is
-  // cleared or filled by the AI suggestion) up to the CSS max-h; beyond that
-  // overflow-y scrolls the text inside the box. Layout effect so the
-  // measurement happens before paint.
-  // biome-ignore lint/correctness/useExhaustiveDependencies: the measurement must run on every draft change even though the value is read from the DOM
-  useLayoutEffect(() => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-    textarea.style.height = "auto";
-    const borders = textarea.offsetHeight - textarea.clientHeight;
-    textarea.style.height = `${textarea.scrollHeight + borders}px`;
-  }, [message]);
+  const textareaRef = useAutosizeTextarea(message);
 
   const { reset: resetSendState } = sendMessage;
   const activeConversationIdRef = useRef(conversationId);
@@ -37,27 +28,17 @@ function ComposerForm({ conversationId }: Readonly<ComposerFormProps>) {
     resetSendState();
   }, [conversationId, resetSendState]);
 
-  const onSubmit = handleSubmit(({ message: rawMessage }) => {
-    const text = rawMessage.trim();
-    if (!text) return;
-
+  const onSubmit = handleSubmit(({ message: text }) => {
     setValue("message", "");
-
     sendMessage.mutate(text, {
+      // Give the text back so the user can retry — only if they are still on
+      // the same conversation and have not started another draft meanwhile
       onError: () => {
         if (activeConversationIdRef.current !== conversationId) return;
         if (getValues("message") === "") setValue("message", text);
       },
     });
   });
-
-  // Chat convention: Enter sends, Shift+Enter breaks the line
-  function handleKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      event.currentTarget.form?.requestSubmit();
-    }
-  }
 
   const { ref: registerTextarea, ...messageField } = register("message");
 
