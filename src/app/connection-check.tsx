@@ -2,11 +2,12 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getConversations, getMe } from "@/lib/api";
-import { QUERY_KEY } from "@/src/constants/query-key";
+import { queryKeys } from "@/src/lib/react-query/query-keys";
+
 
 export function ConnectionCheck() {
-  const me = useQuery({ queryKey: [QUERY_KEY.ME], queryFn: getMe });
-  const conversations = useQuery({ queryKey: [QUERY_KEY.CONVERSATIONS], queryFn: getConversations });
+  const me = useQuery({ queryKey: queryKeys.me(), queryFn: getMe });
+  const conversations = useQuery({ queryKey: queryKeys.conversations(), queryFn: getConversations });
 
   if (me.isLoading || conversations.isLoading) {
     return <p className="mt-2 text-sm text-neutral-500">Conectando à API…</p>;
