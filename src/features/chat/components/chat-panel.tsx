@@ -3,20 +3,18 @@
 import { SearchX } from "lucide-react";
 import { useParams } from "next/navigation";
 import { EmptyState } from "@/components/empty-state";
-import { useConversations } from "@/features/conversations/hooks/use-conversations";
+import { useConversation } from "@/features/conversations/hooks/use-conversation";
+import { useMessages } from "../hooks/use-messages";
 import { ChatContent } from "./chat-content";
 import { ChatHeader } from "./chat-header";
 import { MessageComposer } from "./message-composer";
 
 function ChatPanel() {
   const { conversationId } = useParams<{ conversationId: string }>();
-  const conversations = useConversations();
+  const conversation = useConversation(conversationId);
+  const messages = useMessages(conversationId);
 
-  const conversation = conversations.data?.find(
-    (item) => item.id === conversationId,
-  );
-
-  if (conversations.isSuccess && !conversation) {
+  if (conversation.isSuccess && !conversation.data) {
     return (
       <EmptyState
         icon={SearchX}
@@ -29,9 +27,9 @@ function ChatPanel() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <ChatHeader conversation={conversation} />
+      <ChatHeader conversation={conversation.data} />
 
-      <ChatContent />
+      <ChatContent messages={messages} />
 
       <MessageComposer conversationId={conversationId} />
     </div>

@@ -41,6 +41,7 @@ function ConversationListItem({
             </p>
             <time
               dateTime={conversation.lastMessageAt}
+              suppressHydrationWarning
               className={cn(
                 "shrink-0 text-xs",
                 hasUnread
