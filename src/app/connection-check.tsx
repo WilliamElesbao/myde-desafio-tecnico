@@ -4,10 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getConversations, getMe } from "@/lib/api";
 import { queryKeys } from "@/src/lib/react-query/query-keys";
 
-
 export function ConnectionCheck() {
   const me = useQuery({ queryKey: queryKeys.me(), queryFn: getMe });
-  const conversations = useQuery({ queryKey: queryKeys.conversations(), queryFn: getConversations });
+  const conversations = useQuery({
+    queryKey: queryKeys.conversations(),
+    queryFn: getConversations,
+  });
 
   if (me.isLoading || conversations.isLoading) {
     return <p className="mt-2 text-sm text-neutral-500">Conectando à API…</p>;
@@ -16,14 +18,16 @@ export function ConnectionCheck() {
   if (me.isError || conversations.isError) {
     return (
       <p className="mt-2 text-sm text-red-600">
-        Não consegui conectar. Confira <code>NEXT_PUBLIC_API_URL</code> no seu <code>.env.local</code>.
+        Não consegui conectar. Confira <code>NEXT_PUBLIC_API_URL</code> no seu{" "}
+        <code>.env.local</code>.
       </p>
     );
   }
 
   return (
     <p className="mt-2 text-sm text-green-700">
-      ✓ Conectado como <strong>{me.data?.name}</strong> — {conversations.data?.length} conversas carregadas.
+      ✓ Conectado como <strong>{me.data?.name}</strong> —{" "}
+      {conversations.data?.length} conversas carregadas.
     </p>
   );
 }

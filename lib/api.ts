@@ -59,16 +59,28 @@ export async function getConversations(): Promise<Conversation[]> {
 }
 
 export async function getMessages(conversationId: string): Promise<Message[]> {
-  const { data } = await api.get<Message[]>(`/conversations/${conversationId}/messages`);
+  const { data } = await api.get<Message[]>(
+    `/conversations/${conversationId}/messages`,
+  );
   return data;
 }
 
-export async function sendMessage(conversationId: string, text: string): Promise<Message> {
-  const { data } = await api.post<Message>(`/conversations/${conversationId}/messages`, { text });
+export async function sendMessage(
+  conversationId: string,
+  text: string,
+): Promise<Message> {
+  const { data } = await api.post<Message>(
+    `/conversations/${conversationId}/messages`,
+    { text },
+  );
   return data;
 }
 
-export async function suggestReply(conversationId: string): Promise<AiSuggestion> {
-  const { data } = await api.post<AiSuggestion>("/ai/suggest", { conversationId });
+export async function suggestReply(
+  conversationId: string,
+): Promise<AiSuggestion> {
+  const { data } = await api.post<AiSuggestion>("/ai/suggest", {
+    conversationId,
+  });
   return data;
 }
