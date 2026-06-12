@@ -13,6 +13,9 @@ import { Providers } from "../providers/providers";
 export const metadata: Metadata = {
   title: "Inbox de Atendimento — Desafio Frontend",
   description: "Desafio técnico frontend Myde",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default async function RootLayout({
