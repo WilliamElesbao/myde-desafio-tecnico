@@ -2,7 +2,6 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-
 @theme {
   /** Palette inspired by WhatsApp Web */
   --color-wa-green: #25d366;
@@ -18,7 +17,6 @@
   --background: #ffffff;
   --foreground: #0a0a0a;
 }
-
 
 html,
 body {
