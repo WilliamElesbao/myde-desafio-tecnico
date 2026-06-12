@@ -22,6 +22,7 @@ export function useAiSuggestion(
 ) {
   return useMutation({
     mutationFn: () => suggestReply(conversationId),
+    networkMode: "always",
     onMutate: () => ({ requestedConversationId: conversationId }),
     onSuccess: (data, _variables, context) => {
       if (context.requestedConversationId !== conversationId) return;
