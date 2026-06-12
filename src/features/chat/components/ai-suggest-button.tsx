@@ -2,20 +2,28 @@
 
 import { Loader2, Sparkles } from "lucide-react";
 import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useAiSuggestion } from "../hooks/use-ai-suggestion";
+import type { ComposerFormValues } from "../schemas/composer-form";
 
 type AiSuggestButtonProps = {
   conversationId: string;
 };
 
 function AiSuggestButton({ conversationId }: Readonly<AiSuggestButtonProps>) {
-  const suggestion = useAiSuggestion(conversationId);
+  const { setValue } = useFormContext<ComposerFormValues>();
+  const suggestion = useAiSuggestion(conversationId, {
+    onSuggestion: (text) => setValue("message", text),
+  });
 
+  // The button never unmounts when switching conversations: a pending
+  // "Gerando…" state or an error from the previous conversation is discarded.
   const { reset: resetSuggestion } = suggestion;
+  // biome-ignore lint/correctness/useExhaustiveDependencies: the reset must run exactly when the conversation changes
   useEffect(() => {
     resetSuggestion();
-  }, [resetSuggestion]);
+  }, [conversationId, resetSuggestion]);
 
   return (
     <div className="flex items-center gap-2">

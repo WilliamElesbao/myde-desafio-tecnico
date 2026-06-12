@@ -17,7 +17,3 @@ export type MessagesPage = {
 };
 
 export type MessagesInfiniteData = InfiniteData<MessagesPage, number>;
-
-export type ComposerFormValues = {
-  message: string;
-};
