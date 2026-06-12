@@ -6,8 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "format": "biome check . --write",
+    "lint": "biome check ."
   },
   "dependencies": {
     "@tanstack/react-query": "^5.62.0",
@@ -17,12 +18,11 @@
     "react-dom": "19.0.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.16",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.5.19",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0"
   }
