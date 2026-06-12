@@ -2,7 +2,6 @@ export const QUERY_KEY = {
   ME: "me",
   CONVERSATIONS: "conversations",
   MESSAGES: "messages",
-  AI_SUGGESTION: "ai-suggestion",
 } as const;
 
 export const queryKeys = {
