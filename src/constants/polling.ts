@@ -1,0 +1,7 @@
+export const CONVERSATIONS_POLL_INTERVAL_MS = 5_000;
+
+export const MESSAGES_POLL_INTERVAL_MS = 3_000;
+
+export const QUERY_STALE_TIME_MS = 15_000;
+
+export const SEARCH_DEBOUNCE_MS = 250;

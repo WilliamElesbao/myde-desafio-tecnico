@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-/** Retorna `value` com atraso de `delayMs` — útil para buscas. */
+/**
+ * Returns `value` debounced by `delayMs` — useful for search inputs.
+ */
 export function useDebouncedValue<T>(value: T, delayMs: number): T {
   const [debounced, setDebounced] = useState(value);
 
