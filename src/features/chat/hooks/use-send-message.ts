@@ -1,8 +1,7 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { type Conversation, sendMessage } from "@/lib/http/api";
-import { getQueryClient } from "@/lib/react-query/query-client";
 import { queryKeys } from "@/lib/react-query/query-keys";
 import type { MessagesInfiniteData } from "../types";
 import { buildOptimisticMessage } from "../utils/build-optimistic-message";
@@ -27,7 +26,7 @@ type SendMessageContext = {
  * On success the optimistic message is replaced by the confirmed one.
  */
 export function useSendMessage(conversationId: string) {
-  const queryClient = getQueryClient();
+  const queryClient = useQueryClient();
   const conversationsKey = queryKeys.conversations();
 
   return useMutation({
