@@ -66,6 +66,7 @@ function ComposerForm({ conversationId }: Readonly<ComposerFormProps>) {
           type="submit"
           size="icon"
           aria-label="Enviar"
+          aria-busy={sendMessage.isPending}
           disabled={message.trim().length === 0}
         >
           <SendHorizontal aria-hidden="true" />

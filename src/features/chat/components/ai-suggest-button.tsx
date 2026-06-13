@@ -4,6 +4,7 @@ import { Loader2, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 import { useAiSuggestion } from "../hooks/use-ai-suggestion";
 import type { ComposerFormValues } from "../schemas/composer-form";
 
@@ -32,6 +33,7 @@ function AiSuggestButton({ conversationId }: Readonly<AiSuggestButtonProps>) {
         size="sm"
         onClick={() => suggestion.mutate()}
         disabled={suggestion.isPending}
+        aria-busy={suggestion.isPending}
         aria-label="Sugerir resposta com IA"
       >
         {suggestion.isPending ? (
@@ -39,7 +41,11 @@ function AiSuggestButton({ conversationId }: Readonly<AiSuggestButtonProps>) {
         ) : (
           <Sparkles aria-hidden="true" className="text-wa-green-dark" />
         )}
-        {suggestion.isPending ? "Gerando…" : "Sugerir resposta com IA"}
+        {suggestion.isPending ? (
+          <TextShimmer duration={1.2}>Gerando…</TextShimmer>
+        ) : (
+          "Sugerir resposta com IA"
+        )}
       </Button>
       <span aria-live="polite" className="text-xs text-danger">
         {suggestion.isError ? "Não foi possível gerar a sugestão." : ""}
