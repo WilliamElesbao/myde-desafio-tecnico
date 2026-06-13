@@ -15,6 +15,12 @@ function InboxShell({ sidebar, children }: InboxShellProps) {
 
   return (
     <div className="flex h-dvh flex-col">
+      <a
+        href="#conteudo-principal"
+        className="sr-only rounded-md bg-wa-green-dark px-4 py-2 text-on-accent focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wa-teal"
+      >
+        Pular para o conteúdo
+      </a>
       <OfflineBanner />
       <div className="flex min-h-0 flex-1">
         <aside
@@ -27,6 +33,7 @@ function InboxShell({ sidebar, children }: InboxShellProps) {
           {sidebar}
         </aside>
         <main
+          id="conteudo-principal"
           className={cn(
             "min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-chat-bg md:flex",
             isChatOpen ? "flex" : "hidden",

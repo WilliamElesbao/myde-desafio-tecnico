@@ -29,7 +29,7 @@ function ConversationList({
   }
 
   return (
-    <ul aria-label="Lista de conversas" className="divide-y divide-neutral-100">
+    <ul aria-label="Lista de conversas" className="divide-y divide-line">
       {conversations.map((conversation) => (
         <ConversationListItem
           key={conversation.id}
