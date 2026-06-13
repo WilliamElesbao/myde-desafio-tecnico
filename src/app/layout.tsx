@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import type { PropsWithChildren } from "react";
 import { InboxShell } from "@/components/layout/inbox-shell";
+import { Splash } from "@/components/splash";
 import { AgentBadge } from "@/features/agent/components/agent-badge";
 import { ConversationsPanel } from "@/features/conversations/components/conversations-panel";
 import { getConversations, getMe } from "@/lib/http/api";
@@ -34,6 +35,7 @@ export default async function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
+        <Splash />
         <Providers>
           <HydrationBoundary state={dehydrate(queryClient)}>
             <InboxShell
