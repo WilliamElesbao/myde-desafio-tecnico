@@ -101,7 +101,6 @@ describe("fluxo do inbox (integração)", () => {
     );
     expect(screen.getByText("Rafael Augusto")).toBeInTheDocument();
 
-    
     // clearing the search restores the list
     await user.clear(screen.getByRole("searchbox"));
     expect(await screen.findByText("Mariana Lopes")).toBeInTheDocument();
