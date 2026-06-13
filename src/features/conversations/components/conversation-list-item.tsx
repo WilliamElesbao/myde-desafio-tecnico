@@ -25,8 +25,8 @@ function ConversationListItem({
           hasUnread ? `, ${conversation.unread} mensagens não lidas` : ""
         }`}
         className={cn(
-          "flex items-center gap-3 px-4 py-3 transition-colors hover:bg-neutral-100 focus-visible:bg-neutral-100 focus-visible:outline-none",
-          isActive && "bg-neutral-100",
+          "flex items-center gap-3 px-4 py-3 transition-colors hover:bg-surface-hover focus-visible:bg-surface-hover focus-visible:outline-none",
+          isActive && "bg-surface-hover",
         )}
       >
         <Avatar
@@ -36,7 +36,7 @@ function ConversationListItem({
 
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline justify-between gap-2">
-            <p className="truncate text-sm font-medium text-neutral-900">
+            <p className="truncate text-sm font-medium text-foreground">
               {conversation.contactName}
             </p>
             <time
@@ -46,7 +46,7 @@ function ConversationListItem({
                 "shrink-0 text-xs",
                 hasUnread
                   ? "font-semibold text-wa-green-dark"
-                  : "text-neutral-500",
+                  : "text-muted-foreground",
               )}
             >
               {formatConversationTime(conversation.lastMessageAt)}
@@ -57,7 +57,9 @@ function ConversationListItem({
             <p
               className={cn(
                 "truncate text-sm",
-                hasUnread ? "font-medium text-neutral-800" : "text-neutral-500",
+                hasUnread
+                  ? "font-medium text-foreground"
+                  : "text-muted-foreground",
               )}
             >
               {conversation.lastMessage}

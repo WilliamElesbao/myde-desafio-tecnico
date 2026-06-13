@@ -21,20 +21,20 @@ function AgentBadge() {
 
   if (isError || !me) {
     return (
-      <p role="alert" className="px-4 py-3 text-sm text-red-600">
+      <p role="alert" className="px-4 py-3 text-sm text-danger">
         Não foi possível carregar seu perfil.
       </p>
     );
   }
 
   return (
-    <div className="flex items-center gap-3 border-b border-neutral-200 bg-neutral-50 px-4 py-3">
+    <div className="flex items-center gap-3 border-b border-line bg-surface-muted px-4 py-3">
       <Avatar name={me.name} className="bg-wa-teal" />
       <div className="min-w-0">
-        <p className="truncate text-sm font-semibold text-neutral-900">
+        <p className="truncate text-sm font-semibold text-foreground">
           {me.name}
         </p>
-        <p className="truncate text-xs text-neutral-500">{me.role}</p>
+        <p className="truncate text-xs text-muted-foreground">{me.role}</p>
       </div>
     </div>
   );

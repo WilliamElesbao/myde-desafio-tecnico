@@ -25,9 +25,9 @@ function ErrorState({
         className,
       )}
     >
-      <AlertTriangle aria-hidden="true" className="size-10 text-red-400" />
-      <p className="text-sm font-medium text-neutral-700">{title}</p>
-      <p className="text-sm text-neutral-500">{description}</p>
+      <AlertTriangle aria-hidden="true" className="size-10 text-danger-soft" />
+      <p className="text-sm font-medium text-secondary-foreground">{title}</p>
+      <p className="text-sm text-muted-foreground">{description}</p>
       {onRetry && (
         <Button variant="outline" size="sm" onClick={onRetry}>
           Tentar novamente

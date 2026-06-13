@@ -10,11 +10,11 @@ type ChatHeaderProps = {
 
 function ChatHeader({ conversation }: Readonly<ChatHeaderProps>) {
   return (
-    <header className="flex items-center gap-3 border-b border-neutral-200 bg-neutral-50 px-4 py-2.5">
+    <header className="flex items-center gap-3 border-b border-line bg-surface-muted px-4 py-2.5">
       <Link
         href="/"
         aria-label="Voltar para a lista de conversas"
-        className="rounded-md p-1.5 text-neutral-600 hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wa-green-dark md:hidden"
+        className="rounded-md p-1.5 text-secondary-foreground hover:bg-surface-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wa-green-dark md:hidden"
       >
         <ArrowLeft aria-hidden="true" className="size-5" />
       </Link>
@@ -27,10 +27,10 @@ function ChatHeader({ conversation }: Readonly<ChatHeaderProps>) {
             className="size-9"
           />
           <div className="min-w-0">
-            <h1 className="truncate text-sm font-semibold text-neutral-900">
+            <h1 className="truncate text-sm font-semibold text-foreground">
               {conversation.contactName}
             </h1>
-            <p className="truncate text-xs text-neutral-500">
+            <p className="truncate text-xs text-muted-foreground">
               +{conversation.contactPhone}
             </p>
           </div>

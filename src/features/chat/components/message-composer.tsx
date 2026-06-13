@@ -28,7 +28,7 @@ function MessageComposer({ conversationId }: Readonly<MessageComposerProps>) {
 
   return (
     <FormProvider {...form}>
-      <div className="border-t border-neutral-200 bg-neutral-50 px-4 py-3">
+      <div className="border-t border-line bg-surface-muted px-4 py-3">
         <div className="mb-2">
           <AiSuggestButton conversationId={conversationId} />
         </div>

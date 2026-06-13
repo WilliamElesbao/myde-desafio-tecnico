@@ -13,7 +13,7 @@ function Avatar({ name, color, className, ...props }: AvatarProps) {
       data-slot="avatar"
       aria-hidden="true"
       className={cn(
-        "flex size-10 shrink-0 select-none items-center justify-center rounded-full bg-neutral-400 text-sm font-semibold text-white",
+        "flex size-10 shrink-0 select-none items-center justify-center rounded-full bg-avatar-fallback text-sm font-semibold text-on-accent",
         className,
       )}
       style={color ? { backgroundColor: color } : undefined}

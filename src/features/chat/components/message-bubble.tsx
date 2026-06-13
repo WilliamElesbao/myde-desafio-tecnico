@@ -34,13 +34,13 @@ const MessageBubble = memo(function MessageBubble({
             : "rounded-bl-none bg-bubble-in",
         )}
       >
-        <p className="whitespace-pre-wrap wrap-break-word text-sm text-neutral-900">
+        <p className="whitespace-pre-wrap wrap-break-word text-sm text-foreground">
           {message.body}
         </p>
         <span className="mt-0.5 flex items-center justify-end gap-1">
           <time
             dateTime={message.createdAt}
-            className="text-[11px] text-neutral-500"
+            className="text-[11px] text-muted-foreground"
           >
             {formatMessageTime(message.createdAt)}
           </time>

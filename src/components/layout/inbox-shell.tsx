@@ -20,7 +20,7 @@ function InboxShell({ sidebar, children }: InboxShellProps) {
         <aside
           aria-label="Conversas"
           className={cn(
-            "min-h-0 w-full flex-col overflow-hidden border-neutral-200 bg-sidebar-bg md:flex md:w-96 md:shrink-0 md:border-r",
+            "min-h-0 w-full flex-col overflow-hidden border-line bg-sidebar-bg md:flex md:w-96 md:shrink-0 md:border-r",
             isChatOpen ? "hidden" : "flex",
           )}
         >

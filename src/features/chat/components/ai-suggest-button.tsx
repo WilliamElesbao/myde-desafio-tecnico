@@ -41,7 +41,7 @@ function AiSuggestButton({ conversationId }: Readonly<AiSuggestButtonProps>) {
         )}
         {suggestion.isPending ? "Gerando…" : "Sugerir resposta com IA"}
       </Button>
-      <span aria-live="polite" className="text-xs text-red-600">
+      <span aria-live="polite" className="text-xs text-danger">
         {suggestion.isError ? "Não foi possível gerar a sugestão." : ""}
       </span>
     </div>

@@ -60,7 +60,7 @@ function ComposerForm({ conversationId }: Readonly<ComposerFormProps>) {
           aria-label="Mensagem"
           autoComplete="off"
           rows={1}
-          className="max-h-40 resize-none overflow-y-auto bg-white"
+          className="max-h-40 resize-none overflow-y-auto bg-surface"
         />
         <Button
           type="submit"
@@ -72,7 +72,7 @@ function ComposerForm({ conversationId }: Readonly<ComposerFormProps>) {
         </Button>
       </form>
 
-      <p aria-live="polite" className="mt-1 min-h-4 text-xs text-red-600">
+      <p aria-live="polite" className="mt-1 min-h-4 text-xs text-danger">
         {sendMessage.isError
           ? "Não foi possível enviar a mensagem. Tente novamente."
           : ""}

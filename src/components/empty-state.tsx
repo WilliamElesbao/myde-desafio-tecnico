@@ -24,9 +24,13 @@ function EmptyState({
         className,
       )}
     >
-      {Icon && <Icon aria-hidden="true" className="size-10 text-neutral-300" />}
-      <p className="text-sm font-medium text-neutral-700">{title}</p>
-      {description && <p className="text-sm text-neutral-500">{description}</p>}
+      {Icon && (
+        <Icon aria-hidden="true" className="size-10 text-faint-foreground" />
+      )}
+      <p className="text-sm font-medium text-secondary-foreground">{title}</p>
+      {description && (
+        <p className="text-sm text-muted-foreground">{description}</p>
+      )}
       {action}
     </div>
   );

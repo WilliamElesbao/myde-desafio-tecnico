@@ -4,7 +4,12 @@ const SKELETON_ITEMS = 6;
 
 function ConversationListSkeleton() {
   return (
-    <div role="status" aria-live="polite" aria-label="Carregando conversas">
+    <div
+      role="status"
+      aria-busy="true"
+      aria-live="polite"
+      aria-label="Carregando conversas"
+    >
       {Array.from({ length: SKELETON_ITEMS }, (_, index) => (
         <div
           key={`conversation-skeleton-${

@@ -7,8 +7,8 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-wa-green text-white",
-        secondary: "bg-neutral-200 text-neutral-700",
+        default: "bg-wa-green text-on-accent",
+        secondary: "bg-surface-strong text-secondary-foreground",
       },
     },
     defaultVariants: { variant: "default" },
