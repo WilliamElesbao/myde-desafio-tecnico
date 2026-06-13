@@ -20,6 +20,9 @@ server/dist/
 .DS_Store
 *.log
 coverage/
+test-results/
+playwright-report/
+blob-report/
 .idea/
 .vscode/
 
