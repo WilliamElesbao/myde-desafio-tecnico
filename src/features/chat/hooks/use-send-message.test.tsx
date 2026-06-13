@@ -131,7 +131,7 @@ describe("useSendMessage", () => {
     ).toBe(false);
   });
 
-  it("tenta de novo automaticamente uma vez e remove só a mensagem otimista no erro", async () => {
+  it("remove só a mensagem otimista no erro (rollback por id)", async () => {
     vi.mocked(api.sendMessage).mockRejectedValue(new Error("rede caiu"));
 
     const { queryClient, result } = setup();
@@ -140,11 +140,7 @@ describe("useSendMessage", () => {
       result.current.mutate("vai falhar");
     });
 
-    // retry: 1 → two attempts (with backoff) before surfacing the error
-    await waitFor(() => expect(result.current.isError).toBe(true), {
-      timeout: 5000,
-    });
-    expect(api.sendMessage).toHaveBeenCalledTimes(2);
+    await waitFor(() => expect(result.current.isError).toBe(true));
 
     // rollback by id: only this send's optimistic message is removed
     const messages = getCachedMessages(queryClient);
@@ -158,11 +154,13 @@ describe("useSendMessage", () => {
   });
 
   it("um erro não apaga a mensagem otimista de um envio concorrente", async () => {
-    // route by text: attempts are interleaved between the two mutations, so
-    // ordered one-shot mocks would leak rejections across sends
+    // first send is failed on demand; the concurrent second send stays pending
+    let rejectFirst: () => void = () => {};
     vi.mocked(api.sendMessage).mockImplementation((_id, text) =>
       text === "primeiro envio"
-        ? Promise.reject(new Error("rede caiu"))
+        ? new Promise((_resolve, reject) => {
+            rejectFirst = () => reject(new Error("rede caiu"));
+          })
         : new Promise(() => {}),
     );
 
@@ -173,21 +171,21 @@ describe("useSendMessage", () => {
       result.current.mutate("segundo envio");
     });
 
+    // both optimistic messages are in the cache while in flight
     await waitFor(() => {
       expect(getCachedMessages(queryClient)).toHaveLength(3);
     });
 
-    // the hook result tracks the latest (still pending) mutation, so the
-    // rollback of the first send is observed through the cache itself
-    await waitFor(
-      () => {
-        const messages = getCachedMessages(queryClient);
-        expect(messages.map((message) => message.body)).toEqual([
-          "oi",
-          "segundo envio",
-        ]);
-      },
-      { timeout: 5000 },
-    );
+    // only the failed send is rolled back; the concurrent one survives
+    act(() => {
+      rejectFirst();
+    });
+    await waitFor(() => {
+      const messages = getCachedMessages(queryClient);
+      expect(messages.map((message) => message.body)).toEqual([
+        "oi",
+        "segundo envio",
+      ]);
+    });
   });
 });
