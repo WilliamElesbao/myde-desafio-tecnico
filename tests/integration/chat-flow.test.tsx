@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ChatPanel } from "@/features/chat/components/chat-panel";
 import * as api from "@/lib/http/api";
+import { conversations, messages } from "../../e2e/support/mock-api";
 
 vi.mock("@/lib/http/api", async (importOriginal) => ({
   ...(await importOriginal<typeof api>()),
@@ -24,43 +25,11 @@ vi.mock("next/navigation", () => ({
   useParams: useParamsMock,
 }));
 
-const conversation: api.Conversation = {
-  id: "c-1001",
-  contactName: "Mariana Lopes",
-  contactPhone: "5511988887766",
-  avatarColor: "#25D366",
-  unread: 2,
-  lastMessage: "Minha internet caiu de novo",
-  lastMessageAt: new Date().toISOString(),
-};
+const conversation = conversations[0];
 
-const otherConversation: api.Conversation = {
-  id: "c-1002",
-  contactName: "Rafael Augusto",
-  contactPhone: "5511977776655",
-  avatarColor: "#34B7F1",
-  unread: 0,
-  lastMessage: "Perfeito, obrigado!",
-  lastMessageAt: new Date().toISOString(),
-};
+const otherConversation = conversations[1];
 
-const history: api.Message[] = [
-  {
-    id: "m-1",
-    direction: "in",
-    body: "Bom dia",
-    status: "read",
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: "m-2",
-    direction: "in",
-    body: "Minha internet caiu de novo",
-    status: "read",
-    createdAt: new Date().toISOString(),
-  },
-];
-
+const history = messages;
 /**
  * Stateful mock: like the real API, sent messages become part of the
  * history — the refetch triggered by the onSettled invalidation must return

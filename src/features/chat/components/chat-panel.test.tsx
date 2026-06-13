@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import * as api from "@/lib/http/api";
+import { conversations, messages } from "../../../../e2e/support/mock-api";
 import { ChatPanel } from "./chat-panel";
 
 vi.mock("@/lib/http/api", async (importOriginal) => ({
@@ -15,7 +16,7 @@ vi.mock("@/lib/http/api", async (importOriginal) => ({
 // ChatPanel reads the active conversation from the URL (useParams)
 const { useParamsMock } = vi.hoisted(() => ({
   useParamsMock: vi.fn<() => { conversationId: string }>(() => ({
-    conversationId: "c-1",
+    conversationId: "c-1001",
   })),
 }));
 
@@ -23,34 +24,9 @@ vi.mock("next/navigation", () => ({
   useParams: useParamsMock,
 }));
 
-const conversation: api.Conversation = {
-  id: "c-1",
-  contactName: "Mariana Lopes",
-  contactPhone: "5511988887766",
-  avatarColor: "#25D366",
-  unread: 2,
-  lastMessage: "Minha internet caiu",
-  lastMessageAt: new Date().toISOString(),
-};
+const conversation = conversations[0];
 
-const messages: api.Message[] = [
-  {
-    id: "m-1",
-    direction: "in",
-    body: "Bom dia",
-    status: "read",
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: "m-2",
-    direction: "in",
-    body: "Minha internet caiu",
-    status: "read",
-    createdAt: new Date().toISOString(),
-  },
-];
-
-function renderPanel(conversationId = "c-1") {
+function renderPanel(conversationId = "c-1001") {
   useParamsMock.mockReturnValue({ conversationId });
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },

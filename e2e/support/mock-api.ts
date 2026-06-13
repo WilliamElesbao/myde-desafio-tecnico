@@ -1,4 +1,5 @@
 import type { Page, Route } from "@playwright/test";
+import type { Conversation, Message } from "@/lib/http/api";
 
 export const me = {
   id: "agent-1",
@@ -6,7 +7,7 @@ export const me = {
   role: "Suporte NeoFibra",
 };
 
-export const conversations = [
+export const conversations: Conversation[] = [
   {
     id: "c-1001",
     contactName: "Mariana Lopes",
@@ -27,7 +28,7 @@ export const conversations = [
   },
 ];
 
-export const messages = [
+export const messages: Message[] = [
   {
     id: "m-1",
     direction: "in",
@@ -93,7 +94,7 @@ export async function mockApi(page: Page, options: MockApiOptions = {}) {
         );
       }
       const { text } = request.postDataJSON() as { text: string };
-      const saved = {
+      const saved: Message = {
         id: `m-${Date.now()}`,
         direction: "out",
         body: text,

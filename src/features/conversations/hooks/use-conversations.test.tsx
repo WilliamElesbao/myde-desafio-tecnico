@@ -25,7 +25,7 @@ describe("useConversations", () => {
   it("retorna as conversas da API", async () => {
     const conversations = [
       {
-        id: "c-1",
+        id: "c-1001",
         contactName: "Mariana",
         contactPhone: "55",
         avatarColor: "#fff",

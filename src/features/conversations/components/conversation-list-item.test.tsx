@@ -1,17 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { Conversation } from "@/lib/http/api";
+import { conversations } from "../../../../e2e/support/mock-api";
 import { ConversationListItem } from "./conversation-list-item";
 
-const conversation: Conversation = {
-  id: "c-1",
-  contactName: "Mariana Lopes",
-  contactPhone: "5511988887766",
-  avatarColor: "#25D366",
-  unread: 2,
-  lastMessage: "Minha internet caiu de novo",
-  lastMessageAt: new Date().toISOString(),
-};
+const conversation = conversations[0];
 
 function renderItem(override: Partial<Conversation> = {}, isActive = false) {
   return render(
@@ -28,10 +21,12 @@ describe("ConversationListItem", () => {
   it("mostra nome, última mensagem e link para o chat", () => {
     renderItem();
     expect(screen.getByText("Mariana Lopes")).toBeInTheDocument();
-    expect(screen.getByText("Minha internet caiu de novo")).toBeInTheDocument();
+    expect(
+      screen.getByText("Minha internet caiu de novo agora de manhã"),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link")).toHaveAttribute(
       "href",
-      "/conversations/c-1",
+      "/conversations/c-1001",
     );
   });
 

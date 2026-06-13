@@ -7,6 +7,7 @@ import { ConnectionStatusProvider } from "@/contexts/connection-status-context";
 import { AgentBadge } from "@/features/agent/components/agent-badge";
 import { ConversationsPanel } from "@/features/conversations/components/conversations-panel";
 import * as api from "@/lib/http/api";
+import { conversations } from "../../e2e/support/mock-api";
 
 vi.mock("@/lib/http/api", async (importOriginal) => ({
   ...(await importOriginal<typeof api>()),
@@ -28,27 +29,6 @@ const me: api.Agent = {
   name: "Atendente Myde",
   role: "Suporte NeoFibra",
 };
-
-const conversations: api.Conversation[] = [
-  {
-    id: "c-1001",
-    contactName: "Mariana Lopes",
-    contactPhone: "5511988887766",
-    avatarColor: "#25D366",
-    unread: 2,
-    lastMessage: "Minha internet caiu de novo",
-    lastMessageAt: new Date().toISOString(),
-  },
-  {
-    id: "c-1002",
-    contactName: "Rafael Augusto",
-    contactPhone: "5511977776655",
-    avatarColor: "#34B7F1",
-    unread: 0,
-    lastMessage: "Perfeito, obrigado!",
-    lastMessageAt: new Date().toISOString(),
-  },
-];
 
 /** Reproduces the root layout composition (src/app/layout.tsx) on the client. */
 function renderInbox() {

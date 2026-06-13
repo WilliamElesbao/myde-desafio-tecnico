@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import type { ReactElement } from "react";
 import { describe, expect, it, vi } from "vitest";
 import * as api from "@/lib/http/api";
+import { conversations } from "../../../../e2e/support/mock-api";
 import { ConversationsPanel } from "./conversations-panel";
 
 vi.mock("@/lib/http/api", async (importOriginal) => ({
@@ -19,27 +20,6 @@ const { useParamsMock } = vi.hoisted(() => ({
 vi.mock("next/navigation", () => ({
   useParams: useParamsMock,
 }));
-
-const conversations: api.Conversation[] = [
-  {
-    id: "c-1",
-    contactName: "Mariana Lopes",
-    contactPhone: "5511988887766",
-    avatarColor: "#25D366",
-    unread: 2,
-    lastMessage: "Minha internet caiu",
-    lastMessageAt: new Date().toISOString(),
-  },
-  {
-    id: "c-2",
-    contactName: "Rafael Augusto",
-    contactPhone: "5511977776655",
-    avatarColor: "#34B7F1",
-    unread: 0,
-    lastMessage: "Obrigado!",
-    lastMessageAt: new Date().toISOString(),
-  },
-];
 
 function renderWithClient(ui: ReactElement) {
   const queryClient = new QueryClient({
@@ -82,7 +62,7 @@ describe("ConversationsPanel", () => {
   });
 
   it("destaca a conversa ativa da URL", async () => {
-    useParamsMock.mockReturnValue({ conversationId: "c-2" });
+    useParamsMock.mockReturnValue({ conversationId: "c-1002" });
     vi.mocked(api.getConversations).mockResolvedValue(conversations);
     renderWithClient(<ConversationsPanel />);
 
