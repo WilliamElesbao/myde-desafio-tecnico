@@ -252,6 +252,58 @@ etc.) nos componentes — só utilitários semânticos (`bg-surface`, `text-mute
 
 ---
 
+## CI/CD & Deploy
+
+### Integração contínua (GitHub Actions)
+
+Workflow em [`.github/workflows/ci.yml`](.github/workflows/ci.yml), disparado em **push na `main`**
+e em **todo PR**. Roda em um job linear com cache de dependências do npm e cancelamento de runs
+superados no mesmo ref (`concurrency`):
+
+| Etapa | Comando |
+|---|---|
+| Install | `npm ci` (instala do lockfile, determinístico) |
+| Lint & format | `npm run lint` (Biome — cobre lint **e** formatação) |
+| Typecheck | `npm run typecheck` |
+| Unit + integração (coverage) | `npm run test:coverage` (threshold global de 80%) |
+| E2E | `npm run test:e2e` (Playwright, chromium + mobile) |
+| Build | `npm run build` |
+
+Os browsers do Playwright são instalados com `--with-deps chromium` (os dois projetos do
+`playwright.config` usam engine chromium). Em falha de e2e, o `playwright-report/` é publicado
+como artifact para depuração direto pela página do run.
+
+### Branch protection
+
+A branch **`main` é protegida**: não se commita direto nela — toda mudança entra via **Pull
+Request**. O merge só é permitido com o **CI verde** (status check obrigatório), garantindo que
+nada quebrado chega à produção.
+
+### Deploy contínuo (Vercel)
+
+O projeto é hospedado na **Vercel**, integrada ao repositório:
+
+- **Preview por PR**: cada `push` no PR gera automaticamente um **Preview Deployment** (URL
+  própria) com as mudanças daquele branch — dá para validar a feature no ambiente real antes do
+  merge, e a Vercel comenta o link no PR.
+- **Produção no merge**: ao **mergear o PR na `main`**, a Vercel promove/builda e faz o **deploy
+  de produção** automaticamente.
+
+Fluxo resumido:
+
+```text
+branch  →  PR  →  push
+                   ├─ GitHub Actions CI (lint, types, testes, e2e, build)
+                   └─ Vercel Preview Deployment (URL de preview no PR)
+        →  merge na main (exige CI verde)
+                   └─ Vercel Production Deployment
+```
+
+> As variáveis `NEXT_PUBLIC_API_URL` (e afins) ficam configuradas nos
+> *Environment Variables* da Vercel por ambiente (Preview/Production).
+
+---
+
 ## Trade-offs assumidos
 
 Algumas decisões foram intencionalmente pragmáticas para o escopo do desafio:
@@ -278,5 +330,7 @@ Além dos pontos já mencionados (WebSocket, virtualização e paginação real)
 - **Animações de transição** para entrada, saída e reordenação de elementos (mensagens, estados de carregamento e listas), melhorando a percepção de fluidez sem impactar a usabilidade.
 
 - **Observabilidade e qualidade contínua**, adicionando ferramentas como SonarQube e análise estática complementar para monitorar cobertura, duplicação de código e métricas de manutenção ao longo da evolução do projeto.
+
+- **Code Review assistido por IA**, integrando ferramentas como Claude Code Review ou GitHub Copilot Code Review ao fluxo de Pull Requests para identificar possíveis bugs, problemas de performance, oportunidades de refatoração e violações de padrões antes da revisão humana.
 
 - **Otimizações de runtime e tooling**, avaliando alternativas como Bun para desenvolvimento e execução local, caso tragam ganhos mensuráveis no fluxo de build e DX da equipe.
