@@ -277,6 +277,10 @@ Além dos pontos já mencionados (WebSocket, virtualização e paginação real)
 
 - **Animações de transição** para entrada, saída e reordenação de elementos (mensagens, estados de carregamento e listas), melhorando a percepção de fluidez sem impactar a usabilidade.
 
-- **Observabilidade e qualidade contínua**, adicionando ferramentas como SonarQube e análise estática complementar para monitorar cobertura, duplicação de código e métricas de manutenção ao longo da evolução do projeto.
+- **Qualidade contínua**: evoluir a análise estática com ferramentas como SonarQube para acompanhar cobertura, duplicação de código, complexidade, code smells e métricas de manutenção ao longo da evolução do projeto.
+
+- **Observabilidade**: adicionar instrumentação via OpenTelemetry e integração com plataformas como SigNoz, Grafana ou Datadog para monitoramento de métricas, logs, traces e erros em produção.
+
+- **Product Analytics**: integrar ferramentas como PostHog para acompanhar uso das funcionalidades, comportamento dos usuários, adoção da sugestão por IA e métricas de engajamento do inbox.
 
 - **Otimizações de runtime e tooling**, avaliando alternativas como Bun para desenvolvimento e execução local, caso tragam ganhos mensuráveis no fluxo de build e DX da equipe.
