@@ -1,13 +1,16 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { SPLASH_SEEN_COOKIE, SPLASH_SEEN_MAX_AGE_S } from "@/constants/splash";
 
-const COOKIE_NAME = "neofibra_splash_seen";
-
+/**
+ * Persists, on the server, that the first-visit splash has played — so the
+ * next load is rendered without it. Called by the client splash when it fades.
+ */
 export async function markSplashSeenAction() {
-  (await cookies()).set(COOKIE_NAME, "true", {
+  (await cookies()).set(SPLASH_SEEN_COOKIE, "true", {
     path: "/",
-    maxAge: 60 * 60 * 24 * 365,
+    maxAge: SPLASH_SEEN_MAX_AGE_S,
     sameSite: "lax",
   });
 }

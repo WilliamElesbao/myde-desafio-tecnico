@@ -1,11 +1,10 @@
 import { cookies } from "next/headers";
+import { SPLASH_SEEN_COOKIE } from "@/constants/splash";
 import { SplashClient } from "./splash.client";
-
-const COOKIE_NAME = "neofibra_splash_seen";
 
 export async function Splash() {
   const cookieStore = await cookies();
-  const seen = cookieStore.get(COOKIE_NAME)?.value === "true";
+  const seen = cookieStore.get(SPLASH_SEEN_COOKIE)?.value === "true";
 
   if (seen) return null;
 
