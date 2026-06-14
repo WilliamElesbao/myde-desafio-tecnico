@@ -60,6 +60,17 @@ type MockApiOptions = {
 
 /** Intercepts every API route in the browser (hermetic test, no network). */
 export async function mockApi(page: Page, options: MockApiOptions = {}) {
+  // Skip the first-visit splash so specs target the feature directly (the
+  // server reads this cookie and omits the splash). Port-agnostic via domain.
+  await page.context().addCookies([
+    {
+      name: "neofibra_splash_seen",
+      value: "true",
+      domain: "localhost",
+      path: "/",
+    },
+  ]);
+
   // local copy: every test starts from the same history
   const conversationMessages = messages.map((message) => ({ ...message }));
 
