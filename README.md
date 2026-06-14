@@ -329,7 +329,11 @@ Além dos pontos já mencionados (WebSocket, virtualização e paginação real)
 
 - **Animações de transição** para entrada, saída e reordenação de elementos (mensagens, estados de carregamento e listas), melhorando a percepção de fluidez sem impactar a usabilidade.
 
-- **Observabilidade e qualidade contínua**, adicionando ferramentas como SonarQube e análise estática complementar para monitorar cobertura, duplicação de código e métricas de manutenção ao longo da evolução do projeto.
+- **Qualidade contínua**: evoluir a análise estática com ferramentas como SonarQube para acompanhar cobertura, duplicação de código, complexidade, code smells e métricas de manutenção ao longo da evolução do projeto.
+
+- **Observabilidade**: adicionar instrumentação via OpenTelemetry e integração com plataformas como SigNoz, Grafana ou Datadog para monitoramento de métricas, logs, traces e erros em produção.
+
+- **Product Analytics**: integrar ferramentas como PostHog para acompanhar uso das funcionalidades, comportamento dos usuários, adoção da sugestão por IA e métricas de engajamento do inbox.
 
 - **Code Review assistido por IA**, integrando ferramentas como Claude Code Review ou GitHub Copilot Code Review ao fluxo de Pull Requests para identificar possíveis bugs, problemas de performance, oportunidades de refatoração e violações de padrões antes da revisão humana.
 
