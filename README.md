@@ -5,6 +5,51 @@ consumindo a API hospedada do desafio. O foco é a experiência de frontend: arq
 componentes, fronteira Server/Client consciente, data fetching com sincronização em tempo
 (quase) real, estados de carregamento/erro/vazio e acessibilidade básica.
 
+<table>
+  <thead>
+    <tr>
+      <th colspan="4">Web</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="public/web/splash.png" />
+      </td>
+      <td>
+        <img src="public/web/inbox.png" />
+      </td>
+      <td>
+        <img src="public/web/ai-suggestion.png" />
+      </td>
+      <td>
+        <img src="public/web/message-sent.png" />
+      </td>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th colspan="4">Mobile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="public/mobile/splash.png" />
+      </td>
+      <td>
+        <img src="public/mobile/inbox.png" />
+      </td>
+      <td>
+        <img src="public/mobile/ai-suggestion.png" />
+      </td>
+      <td>
+        <img src="public/mobile/message-sent.png" />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ---
 
 ## Stack
